@@ -16,18 +16,69 @@ const Home = () => {
 
   const [flippedCards, setFlippedCards] = useState([]);
 
-  const toggleCardFlip = (index) => {
-    if (flippedCards.includes(index)) {
-      setFlippedCards(flippedCards.filter((i) => i !== index));
+  const toggleCardFlip = (id) => {
+    if (flippedCards.includes(id)) {
+      setFlippedCards(flippedCards.filter((i) => i !== id));
     } else {
-      setFlippedCards([...flippedCards, index]);
+      setFlippedCards([...flippedCards, id]);
     }
   };
 
+  const eventsData = [
+    {
+      id: 2,
+      title: "Aarohi",
+      subtitle: "The Official Cultural Fest",
+      date: "October",
+      image: "/events/aarohi.png",
+      description:
+        "The official cultural fest spanning 3 days with cultural, technical, and literary events, fun activities, and pro-shows featuring renowned artists and performers.",
+    },
+    {
+      id: 0,
+      title: "Departmental Gathering",
+      subtitle: "Celebrate your department spirit",
+      date: "January",
+      image: "/events/dg.png",
+      description:
+        "A 3-day celebration where the entire department unites to bond and showcase spirit.",
+    },
+    {
+      id: 3,
+      title: "Consortium (E-Cell)",
+      subtitle: "Entrepreneurship Festival",
+      date: "February",
+      image: "/events/consortium.png",
+      description:
+        "The flagship entrepreneurship fest with startup showcases, pitch battles, workshops, and events that celebrate innovation, leadership, and growth.",
+    },
+    {
+      id: 4,
+      title: "Axis",
+      subtitle: "Technical Festival",
+      date: "March",
+      image: "/events/axis.png",
+      description:
+        "VNIT's annual technical festival filled with technical competitions, workshops, exhibitions, and guest lectures that showcase innovation and cutting-edge ideas.",
+    },
+    {
+      id: 1,
+      title: "Institute Gathering",
+      subtitle: "Whole college comes together",
+      date: "March",
+      image: "/events/ig.png",
+      description:
+        "A grand 10-day extravaganza where all departments compete for the coveted IG Trophy.",
+    },
+  ];
+
   return (
     <div className="home-page">
-      {/* Hero Section with Particles */}
-      <section className="hero-section">
+      {/* Hero Section with public background image */}
+      <section
+        className="hero-section"
+        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+      >
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -62,10 +113,10 @@ const Home = () => {
             },
             particles: {
               color: {
-                value: "#FF8C00", // Changed from #ffd700 to orange
+                value: "#FF8C00",
               },
               links: {
-                value: "#FF8C00", // Changed from #ffd700 to orange
+                value: "#FF8C00",
                 distance: 150,
                 enable: true,
                 opacity: 0.3,
@@ -89,7 +140,7 @@ const Home = () => {
                 value: 60,
               },
               opacity: {
-                value: 0.5,
+                value: 0.6,
               },
               shape: {
                 type: "circle",
@@ -104,25 +155,24 @@ const Home = () => {
         />
 
         <div className="hero-overlay"></div>
+
         <div className="hero-content">
           <h1 className="hero-title">
-            Welcome to{" "}
-            <span>
-              <h1>VNIT NAGPUR</h1>
-            </span>
+            Welcome to <span className="highlight">VNIT NAGPUR</span>
           </h1>
           <p className="hero-subtitle">The Fresher's Guide From Aarohi'26</p>
-          
+
           <div className="hero-buttons">
             <button onClick={openInstagram} className="hero-button primary">
               Visit our Social Media
             </button>
-            <Link to="/timeline" className="hero-button secondary ">
+            <Link to="/timeline" className="hero-button secondary">
               Event Timeline
             </Link>
           </div>
         </div>
       </section>
+
       {/* About Section */}
       <section className="about-section">
         <div className="container">
@@ -160,6 +210,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       {/* Aarohi Section */}
       <section className="aarohi-section">
         <div className="container">
@@ -186,7 +237,6 @@ const Home = () => {
           <div className="aarohi-gallery-container">
             <div className="aarohi-gallery">
               <div className="aarohi-gallery-track">
-                {/* First set of images */}
                 {[1, 2, 3, 4, 5, 6].map((num, index) => (
                   <div key={`first-${index}`} className="aarohi-gallery-item">
                     <img
@@ -197,7 +247,6 @@ const Home = () => {
                   </div>
                 ))}
 
-                {/* Duplicate for infinite effect */}
                 {[1, 2, 3, 4, 5, 6].map((num, index) => (
                   <div key={`second-${index}`} className="aarohi-gallery-item">
                     <img
@@ -212,7 +261,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* // Major Events Section */}
+
+      {/* Major Events Section */}
       <section className="major-events-section">
         <div className="container">
           <SectionTitle
@@ -220,149 +270,34 @@ const Home = () => {
             subtitle="Key events during your VNIT journey"
           />
           <div className="events-grid">
-
-
-              {/* Aarohi Card */}
-            <div
-              className={`event-card ${
-                flippedCards.includes(2) ? "flipped" : ""
-              }`}
-              onClick={() => toggleCardFlip(2)}
-            >
-              <div className="event-card-inner">
-                <div className="event-card-front">
-                  <div className="event-icon">
-                    <i className="fas fa-music"></i>
+            {eventsData.map((event) => (
+              <div
+                key={event.id}
+                className={`event-card ${
+                  flippedCards.includes(event.id) ? "flipped" : ""
+                }`}
+                onClick={() => toggleCardFlip(event.id)}
+              >
+                <div className="event-card-inner">
+                  <div className="event-card-front">
+                    <div className="event-icon">
+                      <img src={event.image} alt={event.title} />
+                    </div>
+                    <h3>{event.title}</h3>
+                    <p>{event.subtitle}</p>
                   </div>
-                  <h3>Aarohi</h3>
-                  <p>The Official Cultural Fest</p>
-                </div>
-                <div className="event-card-back">
-                  <h3>Aarohi</h3>
-                  <div className="event-date">October</div>
-                  <p>
-                    The official cultural fest spanning 3 days with cultural,
-                    technical, and literary events, fun activities, and
-                    pro-shows featuring renowned artists and performers.
-                  </p>
+
+                  <div className="event-card-back">
+                    <div className="event-icon">
+                      <img src={event.image} alt={event.title} />
+                    </div>
+                    <h3>{event.title}</h3>
+                    <div className="event-date">{event.date}</div>
+                    <p>{event.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* DG Card */}
-            <div
-              className={`event-card ${
-                flippedCards.includes(0) ? "flipped" : ""
-              }`}
-              onClick={() => toggleCardFlip(0)}
-            >
-              <div className="event-card-inner">
-                <div className="event-card-front">
-                  <div className="event-icon">
-                    <i className="fas fa-users"></i>
-                  </div>
-                  <h3>Departmental Gathering</h3>
-                  <p>Celebrate your department spirit</p>
-                </div>
-                <div className="event-card-back">
-                  <h3>Departmental Gathering</h3>
-                  <div className="event-date">January</div>
-                  <p>
-                    A 3-day celebration where the entire department unites to
-                    bond and showcase spirit.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-
-            
-              {/* Consortium (E-Cell) Card */}
-            <div
-              className={`event-card ${
-                flippedCards.includes(3) ? "flipped" : ""
-              }`}
-              onClick={() => toggleCardFlip(3)}
-            >
-              <div className="event-card-inner">
-                <div className="event-card-front">
-                  <div className="event-icon">
-                    <i className="fas fa-robot"></i>
-                  </div>
-                  <h3>Consortium (E-Cell)</h3>
-                  <p>Entrepreneurship Festival</p>
-                </div>
-                <div className="event-card-back">
-                  <h3>Consortium (E-Cell)</h3>
-                  <div className="event-date">February</div>
-                  <p>
-                   The flagship entrepreneurship fest with startup showcases,
-                    pitch battles, workshops, and events that celebrate
-                    innovation, leadership, and growth.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-
-               {/* Axis Card */}
-            <div
-              className={`event-card ${
-                flippedCards.includes(4) ? "flipped" : ""
-              }`}
-              onClick={() => toggleCardFlip(4)}
-            >
-              <div className="event-card-inner">
-                <div className="event-card-front">
-                  <div className="event-icon">
-                    <i className="fas fa-robot"></i>
-                  </div>
-                  <h3>Axis</h3>
-                  <p>Technical Festival</p>
-                </div>
-                <div className="event-card-back">
-                  <h3>Axis</h3>
-                  <div className="event-date">March</div>
-                  <p>
-                   VNIT's annual technical festival filled with technical competitions, workshops, exhibitions, and guest lectures that showcase innovation and cutting-edge ideas.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-
-            {/* IG Card */}
-            <div
-              className={`event-card ${
-                flippedCards.includes(1) ? "flipped" : ""
-              }`}
-              onClick={() => toggleCardFlip(1)}
-            >
-              <div className="event-card-inner">
-                <div className="event-card-front">
-                  <div className="event-icon">
-                    <i className="fas fa-university"></i>
-                  </div>
-                  <h3>Institute Gathering</h3>
-                  <p>Whole college comes together</p>
-                </div>
-                <div className="event-card-back">
-                  <h3>Institute Gathering</h3>
-                  <div className="event-date">March</div>
-                  <p>
-                    A grand 10-day extravaganza where all departments compete
-                    for the coveted IG Trophy.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            
-           
-
-            
-          
-          
+            ))}
           </div>
         </div>
       </section>

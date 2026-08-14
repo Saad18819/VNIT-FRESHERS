@@ -24,26 +24,30 @@ const Timeline = () => {
       title: 'Mid Semester Examinations',
       description: 'First major exams of the semester - prepare well!'
     },
-    
-    {
+     {
       id: 6,
-      date: '8th November 2026',
-      title: 'Diwali (Holiday)',
-      description: 'Festival of lights holiday break.'
-    },
-    {
-      id: 7,
       date: '18th October 2026',
       title: 'Freshers Event',
       description: 'Set of events and performances for freshers.'
     },
+    
+   
+    
 
     {
-      id: 8,
+      id: 7,
       date: '24th October - 25th October 2026',
       title: 'Aarohi-26',
       description: 'The Official Cultural festival of VNIT Nagpur.'
     },
+
+     {
+      id: 8,
+      date: '8th November 2026',
+      title: 'Diwali (Holiday)',
+      description: 'Festival of lights holiday break.'
+    },
+    
     {
       id: 9,
       date: '7th Dec - 15th Dec 2026',
