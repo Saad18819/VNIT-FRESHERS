@@ -36,7 +36,7 @@ const Timeline = () => {
 
     {
       id: 7,
-      date: '24th October - 25th October 2026',
+      date: 'October',
       title: 'Aarohi-26',
       description: 'The Official Cultural festival of VNIT Nagpur.'
     },
